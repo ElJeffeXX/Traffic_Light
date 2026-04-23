@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light - Timer</title>
+    <link rel="stylesheet" href="taffic.css">
+</head>
+<body>
+     <div class="app">
+      <h1>Traffic Light Changer</h1>
+
+      <div class="traffic-box">
+        <div id="redLight" class="light red"></div>
+        <div id="yellowLight" class="light yellow"></div>
+        <div id="greenLight" class="light green"></div>
+      </div>
+
+      <button onclick="startTrafficLight()">Start</button>
+      <button onclick="stopTrafficLight()">Stop</button>
+
+      <p id="status">Click Start</p>
+    </div>
+<script>
+  let currentLight = 0;
+  let timer;
+
+  function startTrafficLight() {
+    document.getElementById("status").innerText = "Traffic Light is Running...";
+    timer = setInterval(() => {
+      switch (currentLight) {
+        case 0:
+          setLight("greenLight");
+          currentLight = 1;
+          break;
+        case 1:
+          setLight("yellowLight");
+          currentLight = 2;
+          break;
+        case 2:
+          setLight("redLight");
+          currentLight = 0;
+          break;
+      }
+    }, 1000);
+  }
+
+  function stopTrafficLight() {
+    clearInterval(timer);
+    document.getElementById("status").innerText = "Traffic Light Stopped";
+    resetLights();
+  }
+
+  function setLight(lightId) {
+    resetLights();
+    document.getElementById(lightId).classList.add("active");
+  }
+
+  function resetLights() {
+    document.getElementById("redLight").classList.remove("active");
+    document.getElementById("yellowLight").classList.remove("active");
+    document.getElementById("greenLight").classList.remove("active");
+  }
+</script>
+
+</body>
+</html>
